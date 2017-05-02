@@ -1,0 +1,19 @@
+{% import "_includes/forms" as forms %}
+
+<ul class="color-swatches">
+	{% for option in options %}
+		{% set optionId = namespaceId ~ '-option-' ~ loop.index %}
+		{% set value = {
+			label: option.label,
+			color: option.color
+		} %}
+
+		<li>
+			<input type="radio" name="{{ name }}" id="{{ optionId }}" value="{{ value | json_encode }}"{% if (option.default and not values.color) or (values.color == option.color) %} checked{% endif %}>
+
+			<label for="{{ optionId }}" style="background: {{ option.color }};">
+				{{ option.color }}
+			</label>
+		</li>
+	{% endfor %}
+</ul>
