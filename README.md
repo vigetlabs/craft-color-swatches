@@ -2,7 +2,7 @@
 
 Choose a color from a selection of admin defined colors
 
-![Screenshot](resources/screenshots/field-preview.png)
+![Screenshot](colorswatches/resources/screenshots/field-preview.png)
 
 ## Installation
 
@@ -22,7 +22,7 @@ Instead of providing a user a full color picker, Color Swatches gives an admin t
 
 Create a Color Swatches field and provide label and hex value options.
 
-![Screenshot](resources/screenshots/field-definition.png)
+![Screenshot](colorswatches/resources/screenshots/field-definition.png)
 
 ## Using Color Swatches
 
