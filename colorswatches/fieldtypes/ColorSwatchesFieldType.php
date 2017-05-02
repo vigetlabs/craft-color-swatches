@@ -100,6 +100,59 @@ class ColorSwatchesFieldType extends BaseOptionsFieldType
 		return $this->_options;
 	}
 
+		/**
+	 * @inheritDoc IFieldType::validate()
+	 *
+	 * @param mixed $value
+	 *
+	 * @return true|string|array
+	 */
+	public function validate($value)
+	{
+		// If there is no value, we're good
+		if (!$value)
+		{
+			return true;
+		}
+
+		// Encode the model to compare to acceptable options
+		$value = json_encode(array(
+			'label' => $value->label,
+			'color' => $value->color
+		));
+
+		$valid = true;
+
+		// Get all of the acceptable values
+		$acceptableValues = array();
+
+		foreach ($this->getOptions() as $option)
+		{
+			$optionArray = array(
+				'label' => $option['label'],
+				'color' => $option['color']
+			);
+
+			$acceptableValues[] = json_encode($optionArray);
+		}
+
+		// Make sure that the value is on the list
+		if (!in_array($value, $acceptableValues))
+		{
+			$valid = false;
+		}
+
+		if (!$valid)
+		{
+			return Craft::t('{attribute} is invalid.', array(
+				'attribute' => Craft::t($this->model->name)
+			));
+		}
+
+		// All good
+		return true;
+	}
+
 	/**
 	 * @param string $name
 	 * @param mixed  $value
